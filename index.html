@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SEMI FINAL EXAM - Living in the IT Era</title>
+<style>
+:root{
+ --green:#087f5b;--green2:#0b9b72;--teal:#087f8c;--dark:#123b3b;
+ --mint:#e9f8f3;--border:#c8dfda;--danger:#b42318;--white:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#effcf8,#eaf7fa);color:var(--dark);display:flex;flex-direction:column;min-height:100vh}
+header{background:linear-gradient(120deg,var(--green),var(--teal));color:#fff;padding:22px 30px;position:sticky;top:0;z-index:20;box-shadow:0 5px 20px #0002}
+.header-brand{display:flex;align-items:center;gap:18px}
+.header-logo{width:64px;height:64px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;box-shadow:0 4px 10px rgba(0,0,0,0.15)}
+h1{margin:0;font-size:28px}.sub{margin-top:5px;opacity:.92;font-size:16px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:15px}
+.timer{font-size:24px;font-weight:900;background:#fff;color:var(--green);padding:9px 18px;border-radius:12px}
+.status{font-size:13px;background:#ffffff22;padding:9px 12px;border-radius:10px}
+main{max-width:1200px;margin:25px auto;padding:0 18px 60px;flex:1;width:100%}
+footer{background:var(--dark);color:#fff;text-align:center;padding:20px;font-size:14px;margin-top:auto;border-top:3px solid var(--teal)}
+footer b{color:#6ee7b7;font-size:16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:18px;box-shadow:0 12px 35px rgba(7,85,72,.10)}
+.card h2{margin-top:0;color:var(--green)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+label{font-weight:700;display:block;margin-bottom:7px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #b8d7d0;border-radius:9px;font-size:15px;background:#fbfffe}
+textarea{min-height:100px;resize:vertical}
+button{border:0;border-radius:11px;padding:13px 20px;font-weight:800;cursor:pointer}
+.primary{background:linear-gradient(120deg,var(--green),var(--teal));color:#fff}
+.secondary{background:#e2e8f0;color:#1e293b;padding:8px 14px;font-size:13px;border-radius:6px;}
+.secondary:hover{background:#cbd5e1}
+.notice{background:#effaf7;border-left:5px solid var(--green);padding:14px;border-radius:10px}
+.warning{background:#fff8e7;border-left:5px solid #d99a00;padding:14px;border-radius:10px}
+.danger{background:#fff0ef;border-left:5px solid var(--danger);padding:14px;border-radius:10px}
+.option{display:block;margin:9px 0;padding:11px;border:1px solid #d8e9e5;border-radius:9px;font-weight:500;cursor:pointer}
+.option input{width:auto;margin-right:9px}
+.option input:disabled{cursor:not-allowed;opacity:0.5}
+.progress{height:9px;background:#dceee9;border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:linear-gradient(90deg,var(--green),var(--teal));width:0}
+.small{font-size:12px;color:#567}
+.center{text-align:center}
+.hidden{display:none!important}
+.score{font-size:48px;font-weight:900;color:var(--green)}
+.result{font-size:18px}
+
+/* PART 2 & PART 3 RESPONSE BOX STYLES */
+.part-response-box{
+ background:#f0fbf8;
+ border:1px solid #bce3d9;
+ border-radius:12px;
+ padding:18px;
+ margin-bottom:18px;
+}
+.part-response-box h3{
+ margin-top:0;
+ margin-bottom:12px;
+ font-size:16px;
+ color:var(--teal);
+}
+.part-response-box textarea{
+ background:#fff;
+ border:1px solid #a2d2c6;
+ font-family:inherit;
+ font-size:14px;
+ margin-bottom:10px;
+}
+.unlock-hint{
+ font-size:12px;
+ color:#d97706;
+ font-weight:600;
+ margin-top:-4px;
+ margin-bottom:8px;
+ display:block;
+}
+
+/* VIRTUAL DESKTOP STYLES */
+.desktop-env{
+ background:linear-gradient(135deg,#1e3c72,#2a5298);
+ border-radius:14px;
+ padding:20px;
+ color:#fff;
+ min-height:480px;
+ position:relative;
+ box-shadow:inset 0 0 20px rgba(0,0,0,0.3);
+ border:2px solid #102a56;
+}
+.desktop-toolbar{
+ display:flex;
+ gap:10px;
+ margin-bottom:15px;
+ background:rgba(0,0,0,0.25);
+ padding:10px;
+ border-radius:8px;
+ align-items:center;
+ flex-wrap:wrap;
+}
+.rename-bar{
+ display:flex;
+ gap:6px;
+ align-items:center;
+ background:rgba(255,255,255,0.15);
+ padding:4px 8px;
+ border-radius:6px;
+}
+.rename-bar input{
+ width:210px;
+ padding:6px 10px;
+ font-size:13px;
+ height:32px;
+ background:#fff;
+ color:#123b3b;
+ border:1px solid #cbd5e1;
+ border-radius:6px;
+}
+.desktop-icons{
+ display:flex;
+ flex-wrap:wrap;
+ gap:20px;
+ align-items:flex-start;
+}
+.desktop-icon{
+ width:130px;
+ text-align:center;
+ cursor:pointer;
+ padding:10px;
+ border-radius:8px;
+ transition:background 0.2s;
+ user-select:none;
+}
+.desktop-icon:hover{
+ background:rgba(255,255,255,0.15);
+}
+.desktop-icon svg{
+ width:52px;
+ height:52px;
+ margin-bottom:6px;
+ filter:drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+.desktop-icon span{
+ font-size:12px;
+ font-weight:600;
+ display:block;
+ word-break:break-word;
+ text-shadow:0 1px 3px rgba(0,0,0,0.8);
+}
+.window-modal{
+ position:absolute;
+ top:20px;
+ left:20px;
+ right:20px;
+ bottom:20px;
+ background:#f8fafc;
+ color:#1e293b;
+ border-radius:10px;
+ display:flex;
+ flex-direction:column;
+ box-shadow:0 20px 40px rgba(0,0,0,0.5);
+ border:1px solid #cbd5e1;
+ overflow:hidden;
+ z-index:10;
+}
+.window-header{
+ background:#e2e8f0;
+ padding:8px 14px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ font-weight:700;
+ font-size:13px;
+ border-bottom:1px solid #cbd5e1;
+}
+.window-controls{
+ display:flex;
+ gap:6px;
+}
+.win-btn{
+ width:12px;
+ height:12px;
+ border-radius:50%;
+ cursor:pointer;
+ display:inline-block;
+}
+.win-close{background:#ef4444}
+.win-min{background:#f59e0b}
+.win-max{background:#10b981}
+.window-body{
+ padding:16px;
+ flex:1;
+ overflow-y:auto;
+ font-size:13px;
+}
+.window-actions{
+ display:flex;
+ gap:8px;
+ margin-bottom:15px;
+ background:#f1f5f9;
+ padding:8px;
+ border-radius:6px;
+ border:1px solid #e2e8f0;
+ flex-wrap:wrap;
+ align-items:center;
+}
+.file-grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+ gap:15px;
+ margin-top:12px;
+}
+.folder-item{
+ text-align:center;
+ padding:12px;
+ border-radius:6px;
+ background:#ffffff;
+ border:1px solid #cbd5e1;
+ cursor:pointer;
+ box-shadow:0 2px 4px rgba(0,0,0,0.05);
+}
+.folder-item:hover{
+ background:#e0f2fe;
+ border-color:#38bdf8;
+}
+.folder-item svg{
+ width:40px;
+ height:40px;
+ margin-bottom:4px;
+}
+
+/* VIRTUAL SPREADSHEET */
+.sheet-wrap{overflow:auto;border:1px solid #9fc6bd;border-radius:10px}
+.sheet{border-collapse:collapse;min-width:1050px;width:100%;font-size:14px}
+.sheet th,.sheet td{border:1px solid #b8d3ce;padding:0;height:38px}
+.sheet th{background:var(--green);color:#fff;text-align:center;padding:9px}
+.sheet .rownum{width:45px;background:#eef7f4;text-align:center;font-weight:700;color:#53736d}
+.sheet td input{border:0;border-radius:0;width:100%;height:37px;padding:7px;background:#fff;outline:none}
+.sheet td input:focus{box-shadow:inset 0 0 0 2px var(--teal);background:#f2fbf8}
+.sheet td.formula{background:#f4fbf9;color:#476c65;font-weight:700;text-align:center}
+
+/* FULLSCREEN LOCK */
+.fullscreen-lock{position:fixed;inset:0;background:#062f2d;color:#fff;z-index:99999;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px}
+.fullscreen-lock .box{max-width:620px;background:#0b4945;padding:35px;border-radius:20px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}header{padding:18px}.header-brand{flex-direction:row;gap:12px}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-brand">
+ <img src="https://www.mvgallego.edu.ph/assets/images/logo-192x192.png" alt="MV Gallego Logo" class="header-logo">
+ <div>
+  <h1>SEMI FINAL EXAM</h1>
+  <div class="sub">Living in the IT Era</div>
+ </div>
+</div>
+<div class="topbar">
+<div class="status">50 POINTS • 1 HOUR • INDIVIDUAL EXAM</div>
+<div class="timer" id="timer">60:00</div>
+</div>
+</header>
+
+<!-- ENTRY -->
+<div id="startScreen">
+<main>
+<section class="card">
+<h2>EXAM ENTRY</h2>
+<div class="notice">
+<b>IMPORTANT:</b> Once you enter the examination, do not leave the exam,
+switch tabs/windows, or exit fullscreen. Any detected violation automatically
+terminates the examination and records a score of <b>0</b>.
+</div>
+<br>
+<div class="grid">
+<div>
+<label>Last Name *</label>
+<input id="lastName" autocomplete="off" oninput="updateDesktopFolderName()">
+</div>
+<div>
+<label>First Name *</label>
+<input id="firstName" autocomplete="off" oninput="updateDesktopFolderName()">
+</div>
+<div>
+<label>Section *</label>
+<select id="section">
+<option value="">Select section</option>
+<option>2A</option><option>2B</option><option>2C</option><option>2D</option>
+</select>
+</div>
+<div>
+<label>Time Limit</label>
+<input value="60 minutes" disabled>
+</div>
+</div>
+<br>
+<div class="warning">
+<b>Before entering:</b> Close unrelated browser tabs and applications.
+The exam will attempt to enter fullscreen immediately.
+</div>
+<br>
+<button class="primary" onclick="startExam()">ENTER EXAM & START TIMER</button>
+</section>
+</main>
+</div>
+
+<!-- EXAM -->
+<div id="examShell" class="hidden">
+<main>
+
+<section class="card">
+<div class="progress"><div id="progressBar"></div></div>
+<p class="small" id="progressText">Required checklist items: 0 / 15</p>
+</section>
+
+<!-- INTERACTIVE VIRTUAL DESKTOP & FOLDER CREATION TOOL -->
+<section class="card">
+<h2>INTERACTIVE VIRTUAL DESKTOP WORKSPACE</h2>
+<p>Use the desktop below to practice creating and renaming your required folder structure. Click <b>"+ Create Main Folder"</b> to generate your folder, use the <b>Rename</b> controls to set its name to <b>LASTNAME_FIRSTNAME_EXAM</b>, and create your required subfolders inside.</p>
+
+<div class="desktop-env" id="desktopEnv">
+ <div class="desktop-toolbar">
+  <button type="button" class="secondary" onclick="createMainFolderInteractive()">+ Create Main Folder on Desktop</button>
+  
+  <div class="rename-bar">
+   <span style="font-size:12px; font-weight:600;">Rename Main Folder:</span>
+   <input type="text" id="renameInput" placeholder="New folder name..." />
+   <button type="button" class="secondary" onclick="renameMainFolderInteractive()">Rename</button>
+  </div>
+
+  <span style="font-size:12px; opacity:0.85; margin-left:auto;">Target Name: <b id="vTargetName">LASTNAME_FIRSTNAME_EXAM</b></span>
+ </div>
+
+ <div class="desktop-icons" id="desktopIcons">
+  <div class="desktop-icon hidden" id="mainFolderIcon" onclick="openFolderModal('main')">
+   <svg viewBox="0 0 24 24" fill="#fbbf24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+   <span id="vFolderName">New Folder</span>
+  </div>
+  
+  <div class="desktop-icon" onclick="openFolderModal('ethics')">
+   <svg viewBox="0 0 24 24" fill="#60a5fa"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+   <span>DIGITAL_ETHICS_POLICY.txt</span>
+  </div>
+ </div>
+
+ <!-- VIRTUAL FOLDER WINDOW MODAL -->
+ <div class="window-modal hidden" id="folderWindow">
+  <div class="window-header">
+   <span id="windowTitle">C:\Users\Student\Desktop\New Folder</span>
+   <div class="window-controls">
+    <span class="win-btn win-close" onclick="closeFolderModal()"></span>
+   </div>
+  </div>
+  <div class="window-body" id="windowBody">
+   <!-- Dynamic window content rendered by JS -->
+  </div>
+ </div>
+</div>
+</section>
+
+<section class="card">
+<h2>PART I — COMPUTER AND FILE MANAGEMENT (10 pts)</h2>
+<p>Perform the activities in the official examination instructions. The teacher will verify your work.</p>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Created and renamed <b class="lblFolderName">LASTNAME_FIRSTNAME_EXAM</b> folder on the Desktop.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Created Documents, Excel, Images, and Web_Research subfolders.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Created/saved the required files in their correct folders.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Used the required file names and appropriate file types.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Maintained an organized file structure and followed responsible digital practices.</label>
+</section>
+
+<!-- PART II: INTERNET RESEARCH WITH INPUT BOXES BEFORE UNLOCKING CHECKBOXES -->
+<section class="card">
+<h2>PART II — INTERNET RESEARCH AND INFORMATION MANAGEMENT (10 pts)</h2>
+<p><b>Topic:</b> “The Impact of New Technologies on Education and Daily Life.”</p>
+<p>Complete the web research activities below. Type your answers into each input box to unlock the corresponding verification checkbox.</p>
+
+<div class="part-response-box">
+ <h3>Question 1: Credible Online Sources</h3>
+ <label for="p2_q1">List three (3) credible online sources found during your research (Title, URL/Author, Key Information):</label>
+ <textarea id="p2_q1" placeholder="Type your 3 online sources and brief descriptions here..." oninput="validatePartInput('p2', 1)"></textarea>
+ <span class="unlock-hint" id="p2_q1_hint">⚠️ Type your answer above to unlock the checkbox below.</span>
+ 
+ <label class="option">
+  <input type="checkbox" class="taskCheck p2-check" id="p2_chk1" disabled>
+  Found and documented three credible online sources with the required information.
+ </label>
+</div>
+
+<div class="part-response-box">
+ <h3>Question 2: Technology, Information Access & Media Evaluation</h3>
+ <label for="p2_q2">Answer the three required questions about technology impact, information access, media consumption, and evaluation:</label>
+ <textarea id="p2_q2" placeholder="Type your detailed answers to the three questions here..." oninput="validatePartInput('p2', 2)"></textarea>
+ <span class="unlock-hint" id="p2_q2_hint">⚠️ Type your answer above to unlock the checkbox below.</span>
+
+ <label class="option">
+  <input type="checkbox" class="taskCheck p2-check" id="p2_chk2" disabled>
+  Answered the three required questions about technology, information access, media consumption, and information evaluation.
+ </label>
+</div>
+
+<div class="part-response-box">
+ <h3>Question 3: Responsible Information Use & Attribution</h3>
+ <label for="p2_q3">Explain how you applied responsible information use, citation, and proper attribution for your sources:</label>
+ <textarea id="p2_q3" placeholder="Explain your attribution, citation, and responsible information use practices here..." oninput="validatePartInput('p2', 3)"></textarea>
+ <span class="unlock-hint" id="p2_q3_hint">⚠️ Type your answer above to unlock the checkbox below.</span>
+
+ <label class="option">
+  <input type="checkbox" class="taskCheck p2-check" id="p2_chk3" disabled>
+  Applied responsible information use and proper attribution.
+ </label>
+</div>
+</section>
+
+<!-- PART III: DIGITAL ETHICS WITH INPUT BOXES BEFORE UNLOCKING CHECKBOXES -->
+<section class="card">
+<h2>PART III — DIGITAL ETHICS, PRIVACY, AND CYBERSECURITY (10 pts)</h2>
+<p>Complete the required Digital Dilemma Simulation below. Type your response in each input box. <b>The corresponding verification checkbox will unlock only after you provide an answer.</b></p>
+
+<div class="part-response-box">
+ <h3>Question 1: Ethical & Privacy Problem Identification & Decision</h3>
+ <label for="p3_q1">Describe the ethical/privacy problem presented in the scenario and state your decision:</label>
+ <textarea id="p3_q1" placeholder="Type your answer here..." oninput="validatePartInput('p3', 1)"></textarea>
+ <span class="unlock-hint" id="p3_q1_hint">⚠️ Type your answer above to unlock the checkbox below.</span>
+ 
+ <label class="option">
+  <input type="checkbox" class="taskCheck p3-check" id="p3_chk1" disabled>
+  Identified the ethical/privacy problem and stated the appropriate decision.
+ </label>
+</div>
+
+<div class="part-response-box">
+ <h3>Question 2: Decision Justification</h3>
+ <label for="p3_q2">Provide a detailed justification for your decision based on digital ethics principles:</label>
+ <textarea id="p3_q2" placeholder="Type your answer here..." oninput="validatePartInput('p3', 2)"></textarea>
+ <span class="unlock-hint" id="p3_q2_hint">⚠️ Type your answer above to unlock the checkbox below.</span>
+
+ <label class="option">
+  <input type="checkbox" class="taskCheck p3-check" id="p3_chk2" disabled>
+  Provided a justification for the decision.
+ </label>
+</div>
+
+<div class="part-response-box">
+ <h3>Question 3: Cybersecurity Risks & Responsible Practices</h3>
+ <label for="p3_q3">List three (3) cybersecurity risks and three (3) responsible digital-citizenship practices:</label>
+ <textarea id="p3_q3" placeholder="Type 3 cybersecurity risks and 3 digital citizenship practices here..." oninput="validatePartInput('p3', 3)"></textarea>
+ <span class="unlock-hint" id="p3_q3_hint">⚠️ Type your answer above to unlock the checkbox below.</span>
+
+ <label class="option">
+  <input type="checkbox" class="taskCheck p3-check" id="p3_chk3" disabled>
+  Identified three cybersecurity risks and three responsible digital-citizenship practices.
+ </label>
+</div>
+</section>
+
+<section class="card">
+<h2>PART IV — VIRTUAL MICROSOFT EXCEL WORKSHEET (20 pts)</h2>
+<p>Use the blank virtual worksheet below as your working spreadsheet. <b>All cells begin blank.</b> Enter the required data and perform the Excel activity according to the examination instructions.</p>
+
+<div class="notice">
+<b>Teacher checking:</b> The worksheet is not automatically graded. The teacher will check the student's completed Excel work and determine the score.
+</div>
+<br>
+
+<div class="sheet-wrap">
+<table class="sheet" id="sheet">
+<thead>
+<tr>
+<th class="rownum">#</th>
+<th>Student</th>
+<th>Internet<br>Hours/Day</th>
+<th>Social Media<br>Hours/Day</th>
+<th>Online Learning<br>Hours/Day</th>
+<th>Devices<br>Used</th>
+<th>Productivity<br>Rating</th>
+<th>Total Digital<br>Hours</th>
+<th>Technology Use<br>Category</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+
+<br>
+<div class="notice">
+Complete the required Excel calculations, data analysis, formatting, and chart in the actual Excel file as instructed by the examination.
+The virtual worksheet here is provided as an on-screen working grid.
+</div>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Completed the required Student Technology Survey data entry.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Completed the required Excel formatting and worksheet organization.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Completed the required formulas/functions, including SUM, AVERAGE, and IF as applicable.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Completed the required data analysis and calculations.</label>
+
+<label class="option"><input type="checkbox" class="taskCheck">
+Created the required Student Internet Hours per Day chart.
+</label>
+</section>
+
+<section class="card center">
+<h2>SUBMIT EXAM</h2>
+<div class="warning">
+<b>FINAL REMINDER:</b> Make sure your required checklist is complete.
+Your checklist is an acknowledgement of the work you have completed.
+<b>The teacher will perform the actual checking and scoring.</b>
+</div>
+<br>
+<button type="button" class="primary" id="btnSubmit" onclick="submitExam()">SUBMIT EXAM</button>
+</section>
+
+</main>
+</div>
+
+<!-- RESULT -->
+<div id="resultScreen" class="hidden">
+<main>
+<section class="card center result">
+<h2>EXAM SUBMITTED</h2>
+<p><b id="resultName"></b></p>
+<p>Section: <b id="resultSection"></b></p>
+<p>Timestamp: <b id="resultTime"></b></p>
+
+<div class="score" id="resultScore">PENDING TEACHER CHECK</div>
+
+<p>Your examination has been submitted successfully.</p>
+<div class="notice">
+<b>Teacher Evaluation:</b> Your actual score will be determined by the teacher
+based on the submitted practical requirements and the official 50-point rubric.
+</div>
+<br>
+<p><b>CLICK THE "PRINT/SAVE RESULT" BUTTON BELOW AND SUBMIT YOUR RESULTS TO ME IN THE GC.</b></p>
+<button type="button" class="primary" onclick="window.print()">PRINT / SAVE RESULT</button>
+</section>
+</main>
+</div>
+
+<!-- VIOLATION -->
+<div id="lockScreen" class="fullscreen-lock hidden">
+<div class="box">
+<h2>EXAM VIOLATION DETECTED</h2>
+<p>The examination has been terminated.</p>
+<p>Final score: <b>0 / 50</b></p>
+<p>Violation: <b id="violationReason"></b></p>
+<p>Please inform your teacher.</p>
+</div>
+</div>
+
+<footer>
+ Exam Developed and Monitored by<br>
+ <b>Mr. Arjay A. Maniego, LPT, MA</b>
+</footer>
+
+<script>
+let seconds=3600;
+let timerId=null;
+let started=false;
+let submitted=false;
+let violation=false;
+
+// Virtual Directory State
+let currentMainFolderName = "New Folder";
+let createdSubfolders = [];
+
+const taskChecks=()=>[...document.querySelectorAll(".taskCheck")];
+
+function getFormattedFolderName(){
+ const last=document.getElementById("lastName").value.trim().toUpperCase()||"LASTNAME";
+ const first=document.getElementById("firstName").value.trim().toUpperCase()||"FIRSTNAME";
+ return `${last}_${first}_EXAM`;
+}
+
+function updateDesktopFolderName(){
+ const folderName=getFormattedFolderName();
+ document.getElementById("vTargetName").textContent=folderName;
+ document.getElementById("renameInput").value=folderName;
+ document.querySelectorAll(".lblFolderName").forEach(el=>el.textContent=folderName);
+}
+
+function createMainFolderInteractive(){
+ const mainIcon = document.getElementById("mainFolderIcon");
+ mainIcon.classList.remove("hidden");
+ if(currentMainFolderName === "New Folder"){
+  document.getElementById("renameInput").value = getFormattedFolderName();
+ }
+}
+
+function renameMainFolderInteractive(){
+ const newName = document.getElementById("renameInput").value.trim();
+ if(newName){
+  currentMainFolderName = newName;
+  document.getElementById("vFolderName").textContent = currentMainFolderName;
+  
+  // Update open window title if currently viewing
+  const winTitle = document.getElementById("windowTitle");
+  if(winTitle && !document.getElementById("folderWindow").classList.contains("hidden")){
+   winTitle.textContent = `C:\\Users\\Student\\Desktop\\${currentMainFolderName}`;
+  }
+ }
+}
+
+function createSubfolderInteractive(folderName){
+ if(!createdSubfolders.includes(folderName)){
+  createdSubfolders.push(folderName);
+  renderSubfolderGrid();
+ }
+}
+
+function renderSubfolderGrid(){
+ const grid = document.getElementById("virtualFileGrid");
+ if(!grid) return;
+ 
+ if(createdSubfolders.length === 0){
+  grid.innerHTML = `<p style="grid-column: 1/-1; color:#64748b; font-style:italic;">This folder is empty. Click the subfolder buttons above to create required folders.</p>`;
+  return;
+ }
+ 
+ grid.innerHTML = createdSubfolders.map(name => `
+  <div class="folder-item">
+   <svg viewBox="0 0 24 24" fill="#fbbf24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+   <div><b>${name}</b></div>
+  </div>
+ `).join('');
+}
+
+function openFolderModal(type){
+ const win=document.getElementById("folderWindow");
+ const title=document.getElementById("windowTitle");
+ const body=document.getElementById("windowBody");
+
+ win.classList.remove("hidden");
+
+ if(type==='main'){
+  title.textContent=`C:\\Users\\Student\\Desktop\\${currentMainFolderName}`;
+  body.innerHTML=`
+   <div class="window-actions">
+    <b>Folder Actions:</b>
+    <button type="button" class="secondary" onclick="createSubfolderInteractive('Documents')">+ Documents</button>
+    <button type="button" class="secondary" onclick="createSubfolderInteractive('Excel')">+ Excel</button>
+    <button type="button" class="secondary" onclick="createSubfolderInteractive('Images')">+ Images</button>
+    <button type="button" class="secondary" onclick="createSubfolderInteractive('Web_Research')">+ Web_Research</button>
+   </div>
+   <p><b>Contents of <code>${currentMainFolderName}</code>:</b></p>
+   <div class="file-grid" id="virtualFileGrid"></div>
+   <br>
+   <div class="notice">
+    <b>Instructions Reminder:</b> Practice virtual creation and renaming here, then perform the actual folder creation on your local PC Desktop.
+   </div>
+  `;
+  renderSubfolderGrid();
+ } else if(type==='ethics'){
+  title.textContent=`DIGITAL_ETHICS_POLICY.txt - Notepad`;
+  body.innerHTML=`
+   <div style="font-family:monospace; background:#fff; padding:12px; border:1px solid #ccc; border-radius:6px; line-height:1.6;">
+    <strong>=== DIGITAL ETHICS & LABORATORY GUIDELINES ===</strong><br><br>
+    1. <b>File Integrity:</b> Create and save all required files strictly inside your <code>${getFormattedFolderName()}</code> folder.<br>
+    2. <b>Academic Honesty:</b> Observe proper digital ethics, responsible internet use, data privacy, and cybersecurity practices.<br>
+    3. <b>Privacy Protection:</b> Do NOT delete, modify, or access files belonging to other students or workstations.<br>
+    4. <b>Submission Protocol:</b> Submit the completed folder/files according to your instructor's explicit instructions.<br>
+   </div>
+  `;
+ }
+}
+
+function closeFolderModal(){
+ document.getElementById("folderWindow").classList.add("hidden");
+}
+
+function validatePartInput(prefix, qNum){
+ const txt = document.getElementById(`${prefix}_q${qNum}`).value.trim();
+ const chk = document.getElementById(`${prefix}_chk${qNum}`);
+ const hint = document.getElementById(`${prefix}_q${qNum}_hint`);
+ 
+ if(txt.length > 5){
+  chk.disabled = false;
+  hint.style.color = "#087f5b";
+  hint.textContent = "✅ Answer recorded. Checkbox is now unlocked!";
+ } else {
+  chk.disabled = true;
+  chk.checked = false;
+  hint.style.color = "#d97706";
+  hint.textContent = "⚠️ Type your answer above to unlock the checkbox below.";
+ }
+ updateProgress();
+}
+
+function buildBlankWorksheet(){
+ const tbody=document.querySelector("#sheet tbody");
+ tbody.innerHTML="";
+ for(let r=1;r<=10;r++){
+   const tr=document.createElement("tr");
+   tr.innerHTML=`
+   <td class="rownum">${r}</td>
+   <td><input type="text" aria-label="Student ${r}"></td>
+   <td><input type="number" min="0" max="24"></td>
+   <td><input type="number" min="0" max="24"></td>
+   <td><input type="number" min="0" max="24"></td>
+   <td><input type="number" min="0" max="20"></td>
+   <td><input type="number" min="1" max="5"></td>
+   <td class="formula"></td>
+   <td class="formula"></td>`;
+   tbody.appendChild(tr);
+ }
+}
+
+function updateProgress(){
+ const checks=taskChecks();
+ const done=checks.filter(x=>x.checked).length;
+ document.getElementById("progressBar").style.width=(done/checks.length*100)+"%";
+ document.getElementById("progressText").textContent=
+   `Required checklist items: ${done} / ${checks.length}`;
+}
+
+function startExam(){
+ const last=document.getElementById("lastName").value.trim();
+ const first=document.getElementById("firstName").value.trim();
+ const section=document.getElementById("section").value;
+
+ if(!last||!first||!section){
+   return;
+ }
+
+ started=true;
+ document.getElementById("startScreen").classList.add("hidden");
+ document.getElementById("examShell").classList.remove("hidden");
+
+ updateDesktopFolderName();
+ buildBlankWorksheet();
+ updateProgress();
+ requestFullscreen();
+ startTimer();
+
+ document.addEventListener("visibilitychange",()=>{
+   if(started&&!submitted&&!violation&&document.hidden)
+     triggerViolation("Changed tabs or left the exam window.");
+ });
+
+ document.addEventListener("fullscreenchange",()=>{
+   if(started&&!submitted&&!violation&&!document.fullscreenElement)
+     triggerViolation("Exited fullscreen mode.");
+ });
+
+ window.addEventListener("blur",()=>{
+   if(started&&!submitted&&!violation)
+     triggerViolation("Exam window lost focus.");
+ });
+}
+
+function requestFullscreen(){
+ if(document.documentElement.requestFullscreen){
+   document.documentElement.requestFullscreen().catch(()=>{});
+ }
+}
+
+function startTimer(){
+ timerId=setInterval(()=>{
+   if(submitted||violation)return;
+   seconds--;
+   const m=String(Math.floor(seconds/60)).padStart(2,"0");
+   const s=String(seconds%60).padStart(2,"0");
+   document.getElementById("timer").textContent=`${m}:${s}`;
+
+   if(seconds<=0){
+     clearInterval(timerId);
+     submitExam(true);
+   }
+ },1000);
+}
+
+function triggerViolation(reason){
+ if(violation||submitted)return;
+
+ violation=true;
+ clearInterval(timerId);
+
+ document.getElementById("violationReason").textContent=reason;
+ document.getElementById("examShell").classList.add("hidden");
+ document.getElementById("lockScreen").classList.remove("hidden");
+
+ const result={
+   lastName:document.getElementById("lastName").value,
+   firstName:document.getElementById("firstName").value,
+   section:document.getElementById("section").value,
+   timestamp:new Date().toLocaleString(),
+   score:0,
+   violation:true,
+   violationReason:reason
+ };
+
+ localStorage.setItem("mst211_exam_result",JSON.stringify(result));
+}
+
+function submitExam(timeExpired=false){
+ if(submitted||violation)return;
+
+ const checks=taskChecks();
+ const incomplete=checks.filter(x=>!x.checked);
+
+ if(!timeExpired && incomplete.length>0){
+   incomplete[0].scrollIntoView({behavior:"smooth",block:"center"});
+   return;
+ }
+
+ submitted=true;
+ clearInterval(timerId);
+
+ const result={
+   lastName:document.getElementById("lastName").value,
+   firstName:document.getElementById("firstName").value,
+   section:document.getElementById("section").value,
+   timestamp:new Date().toLocaleString(),
+   part2_answers:{
+    q1: document.getElementById("p2_q1").value,
+    q2: document.getElementById("p2_q2").value,
+    q3: document.getElementById("p2_q3").value
+   },
+   part3_answers:{
+    q1: document.getElementById("p3_q1").value,
+    q2: document.getElementById("p3_q2").value,
+    q3: document.getElementById("p3_q3").value
+   },
+   score:"PENDING TEACHER CHECK",
+   violation:false,
+   timeExpired
+ };
+
+ localStorage.setItem("mst211_exam_result",JSON.stringify(result));
+
+ document.getElementById("examShell").classList.add("hidden");
+ document.getElementById("resultScreen").classList.remove("hidden");
+
+ document.getElementById("resultName").textContent=
+   result.lastName+", "+result.firstName;
+ document.getElementById("resultSection").textContent=result.section;
+ document.getElementById("resultTime").textContent=result.timestamp;
+
+ if(timeExpired){
+   document.getElementById("resultScore").textContent="TIME EXPIRED — TEACHER CHECK";
+ }
+
+ if(document.fullscreenElement){
+   document.exitFullscreen().catch(()=>{});
+ }
+}
+
+document.addEventListener("change",(e)=>{
+ if(e.target.classList.contains("taskCheck"))updateProgress();
+});
+</script>
+
+</body>
+</html>
